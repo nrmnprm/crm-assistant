@@ -1,0 +1,1658 @@
+[
+ {
+  "code": "NW-AX-250",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 250",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    70
+   ],
+   [
+    275,
+    66
+   ],
+   [
+    550,
+    53
+   ],
+   [
+    825,
+    31
+   ],
+   [
+    1100,
+    0
+   ]
+  ],
+  "powerW": 45,
+  "noiseDbA": 46,
+  "voltage": "230 V 1~",
+  "priceUsd": 95,
+  "availability": "in_stock",
+  "stockQty": 13,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-250E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 250 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    70
+   ],
+   [
+    275,
+    66
+   ],
+   [
+    550,
+    53
+   ],
+   [
+    825,
+    31
+   ],
+   [
+    1100,
+    0
+   ]
+  ],
+  "powerW": 32,
+  "noiseDbA": 43,
+  "voltage": "230 V 1~",
+  "priceUsd": 140,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 7,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-300",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 300",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    90
+   ],
+   [
+    475,
+    84
+   ],
+   [
+    950,
+    68
+   ],
+   [
+    1425,
+    39
+   ],
+   [
+    1900,
+    0
+   ]
+  ],
+  "powerW": 70,
+  "noiseDbA": 49,
+  "voltage": "230 V 1~",
+  "priceUsd": 120,
+  "availability": "in_stock",
+  "stockQty": 5,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-300E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 300 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    90
+   ],
+   [
+    475,
+    84
+   ],
+   [
+    950,
+    68
+   ],
+   [
+    1425,
+    39
+   ],
+   [
+    1900,
+    0
+   ]
+  ],
+  "powerW": 50,
+  "noiseDbA": 46,
+  "voltage": "230 V 1~",
+  "priceUsd": 175,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-350",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 350",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    110
+   ],
+   [
+    725,
+    103
+   ],
+   [
+    1450,
+    83
+   ],
+   [
+    2175,
+    48
+   ],
+   [
+    2900,
+    0
+   ]
+  ],
+  "powerW": 120,
+  "noiseDbA": 52,
+  "voltage": "230 V 1~",
+  "priceUsd": 160,
+  "availability": "in_stock",
+  "stockQty": 13,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-350E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 350 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    110
+   ],
+   [
+    725,
+    103
+   ],
+   [
+    1450,
+    83
+   ],
+   [
+    2175,
+    48
+   ],
+   [
+    2900,
+    0
+   ]
+  ],
+  "powerW": 86,
+  "noiseDbA": 49,
+  "voltage": "230 V 1~",
+  "priceUsd": 230,
+  "availability": "in_stock",
+  "stockQty": 3,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-400",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 400",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    140
+   ],
+   [
+    1050,
+    131
+   ],
+   [
+    2100,
+    105
+   ],
+   [
+    3150,
+    61
+   ],
+   [
+    4200,
+    0
+   ]
+  ],
+  "powerW": 210,
+  "noiseDbA": 55,
+  "voltage": "230 V 1~",
+  "priceUsd": 215,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-400E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 400 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    140
+   ],
+   [
+    1050,
+    131
+   ],
+   [
+    2100,
+    105
+   ],
+   [
+    3150,
+    61
+   ],
+   [
+    4200,
+    0
+   ]
+  ],
+  "powerW": 151,
+  "noiseDbA": 52,
+  "voltage": "230 V 1~",
+  "priceUsd": 310,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-450",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 450",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    165
+   ],
+   [
+    1400,
+    155
+   ],
+   [
+    2800,
+    124
+   ],
+   [
+    4200,
+    72
+   ],
+   [
+    5600,
+    0
+   ]
+  ],
+  "powerW": 320,
+  "noiseDbA": 58,
+  "voltage": "230 V 1~",
+  "priceUsd": 280,
+  "availability": "in_stock",
+  "stockQty": 6,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-450E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 450 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    165
+   ],
+   [
+    1400,
+    155
+   ],
+   [
+    2800,
+    124
+   ],
+   [
+    4200,
+    72
+   ],
+   [
+    5600,
+    0
+   ]
+  ],
+  "powerW": 230,
+  "noiseDbA": 55,
+  "voltage": "230 V 1~",
+  "priceUsd": 405,
+  "availability": "in_stock",
+  "stockQty": 5,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-500",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 500",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    190
+   ],
+   [
+    1800,
+    178
+   ],
+   [
+    3600,
+    143
+   ],
+   [
+    5400,
+    83
+   ],
+   [
+    7200,
+    0
+   ]
+  ],
+  "powerW": 450,
+  "noiseDbA": 61,
+  "voltage": "230 V 1~",
+  "priceUsd": 360,
+  "availability": "in_stock",
+  "stockQty": 3,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-AX-500E",
+  "category": "Axial wall fans",
+  "name": "Axial wall fan 500 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    190
+   ],
+   [
+    1800,
+    178
+   ],
+   [
+    3600,
+    143
+   ],
+   [
+    5400,
+    83
+   ],
+   [
+    7200,
+    0
+   ]
+  ],
+  "powerW": 324,
+  "noiseDbA": 58,
+  "voltage": "230 V 1~",
+  "priceUsd": 520,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-100",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 100",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    250
+   ],
+   [
+    60,
+    234
+   ],
+   [
+    120,
+    188
+   ],
+   [
+    180,
+    109
+   ],
+   [
+    240,
+    0
+   ]
+  ],
+  "powerW": 30,
+  "noiseDbA": 38,
+  "voltage": "230 V 1~",
+  "priceUsd": 85,
+  "availability": "in_stock",
+  "stockQty": 21,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-100E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 100 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    250
+   ],
+   [
+    60,
+    234
+   ],
+   [
+    120,
+    188
+   ],
+   [
+    180,
+    109
+   ],
+   [
+    240,
+    0
+   ]
+  ],
+  "powerW": 22,
+  "noiseDbA": 35,
+  "voltage": "230 V 1~",
+  "priceUsd": 125,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 5,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-125",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 125",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    300
+   ],
+   [
+    95,
+    281
+   ],
+   [
+    190,
+    225
+   ],
+   [
+    285,
+    131
+   ],
+   [
+    380,
+    0
+   ]
+  ],
+  "powerW": 45,
+  "noiseDbA": 40,
+  "voltage": "230 V 1~",
+  "priceUsd": 105,
+  "availability": "in_stock",
+  "stockQty": 4,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-125E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 125 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    300
+   ],
+   [
+    95,
+    281
+   ],
+   [
+    190,
+    225
+   ],
+   [
+    285,
+    131
+   ],
+   [
+    380,
+    0
+   ]
+  ],
+  "powerW": 32,
+  "noiseDbA": 37,
+  "voltage": "230 V 1~",
+  "priceUsd": 150,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-160",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 160",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    380
+   ],
+   [
+    163,
+    356
+   ],
+   [
+    325,
+    285
+   ],
+   [
+    488,
+    166
+   ],
+   [
+    650,
+    0
+   ]
+  ],
+  "powerW": 75,
+  "noiseDbA": 43,
+  "voltage": "230 V 1~",
+  "priceUsd": 140,
+  "availability": "in_stock",
+  "stockQty": 12,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-160E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 160 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    380
+   ],
+   [
+    163,
+    356
+   ],
+   [
+    325,
+    285
+   ],
+   [
+    488,
+    166
+   ],
+   [
+    650,
+    0
+   ]
+  ],
+  "powerW": 54,
+  "noiseDbA": 40,
+  "voltage": "230 V 1~",
+  "priceUsd": 205,
+  "availability": "in_stock",
+  "stockQty": 6,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-200",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 200",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    450
+   ],
+   [
+    263,
+    422
+   ],
+   [
+    525,
+    338
+   ],
+   [
+    788,
+    197
+   ],
+   [
+    1050,
+    0
+   ]
+  ],
+  "powerW": 120,
+  "noiseDbA": 46,
+  "voltage": "230 V 1~",
+  "priceUsd": 185,
+  "availability": "in_stock",
+  "stockQty": 1,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-200E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 200 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    450
+   ],
+   [
+    263,
+    422
+   ],
+   [
+    525,
+    338
+   ],
+   [
+    788,
+    197
+   ],
+   [
+    1050,
+    0
+   ]
+  ],
+  "powerW": 86,
+  "noiseDbA": 43,
+  "voltage": "230 V 1~",
+  "priceUsd": 270,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-250",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 250",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    388,
+    488
+   ],
+   [
+    775,
+    390
+   ],
+   [
+    1163,
+    228
+   ],
+   [
+    1550,
+    0
+   ]
+  ],
+  "powerW": 190,
+  "noiseDbA": 49,
+  "voltage": "230 V 1~",
+  "priceUsd": 245,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-250E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 250 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    388,
+    488
+   ],
+   [
+    775,
+    390
+   ],
+   [
+    1163,
+    228
+   ],
+   [
+    1550,
+    0
+   ]
+  ],
+  "powerW": 137,
+  "noiseDbA": 46,
+  "voltage": "230 V 1~",
+  "priceUsd": 355,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 9,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-315",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 315",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    600
+   ],
+   [
+    575,
+    563
+   ],
+   [
+    1150,
+    450
+   ],
+   [
+    1725,
+    263
+   ],
+   [
+    2300,
+    0
+   ]
+  ],
+  "powerW": 300,
+  "noiseDbA": 52,
+  "voltage": "230 V 1~",
+  "priceUsd": 330,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 9,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-ID-315E",
+  "category": "Inline duct fans",
+  "name": "Inline duct fan 315 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    600
+   ],
+   [
+    575,
+    563
+   ],
+   [
+    1150,
+    450
+   ],
+   [
+    1725,
+    263
+   ],
+   [
+    2300,
+    0
+   ]
+  ],
+  "powerW": 216,
+  "noiseDbA": 49,
+  "voltage": "230 V 1~",
+  "priceUsd": 480,
+  "availability": "in_stock",
+  "stockQty": 10,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-40-20",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 40-20",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    420
+   ],
+   [
+    375,
+    394
+   ],
+   [
+    750,
+    315
+   ],
+   [
+    1125,
+    184
+   ],
+   [
+    1500,
+    0
+   ]
+  ],
+  "powerW": 230,
+  "noiseDbA": 50,
+  "voltage": "230 V 1~",
+  "priceUsd": 410,
+  "availability": "in_stock",
+  "stockQty": 9,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-40-20E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 40-20 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    420
+   ],
+   [
+    375,
+    394
+   ],
+   [
+    750,
+    315
+   ],
+   [
+    1125,
+    184
+   ],
+   [
+    1500,
+    0
+   ]
+  ],
+  "powerW": 166,
+  "noiseDbA": 47,
+  "voltage": "230 V 1~",
+  "priceUsd": 595,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 7,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-50-25",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 50-25",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    650,
+    488
+   ],
+   [
+    1300,
+    390
+   ],
+   [
+    1950,
+    228
+   ],
+   [
+    2600,
+    0
+   ]
+  ],
+  "powerW": 380,
+  "noiseDbA": 53,
+  "voltage": "230 V 1~",
+  "priceUsd": 520,
+  "availability": "in_stock",
+  "stockQty": 13,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-50-25E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 50-25 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    650,
+    488
+   ],
+   [
+    1300,
+    390
+   ],
+   [
+    1950,
+    228
+   ],
+   [
+    2600,
+    0
+   ]
+  ],
+  "powerW": 274,
+  "noiseDbA": 50,
+  "voltage": "230 V 1~",
+  "priceUsd": 755,
+  "availability": "in_stock",
+  "stockQty": 11,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-60-30",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 60-30",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    640
+   ],
+   [
+    975,
+    600
+   ],
+   [
+    1950,
+    480
+   ],
+   [
+    2925,
+    280
+   ],
+   [
+    3900,
+    0
+   ]
+  ],
+  "powerW": 620,
+  "noiseDbA": 56,
+  "voltage": "230 V 1~",
+  "priceUsd": 690,
+  "availability": "in_stock",
+  "stockQty": 5,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-60-30E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 60-30 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    640
+   ],
+   [
+    975,
+    600
+   ],
+   [
+    1950,
+    480
+   ],
+   [
+    2925,
+    280
+   ],
+   [
+    3900,
+    0
+   ]
+  ],
+  "powerW": 446,
+  "noiseDbA": 53,
+  "voltage": "230 V 1~",
+  "priceUsd": 1000,
+  "availability": "in_stock",
+  "stockQty": 24,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-60-35",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 60-35",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    700
+   ],
+   [
+    1200,
+    656
+   ],
+   [
+    2400,
+    525
+   ],
+   [
+    3600,
+    306
+   ],
+   [
+    4800,
+    0
+   ]
+  ],
+  "powerW": 850,
+  "noiseDbA": 58,
+  "voltage": "230 V 1~",
+  "priceUsd": 820,
+  "availability": "in_stock",
+  "stockQty": 3,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-60-35E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 60-35 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    700
+   ],
+   [
+    1200,
+    656
+   ],
+   [
+    2400,
+    525
+   ],
+   [
+    3600,
+    306
+   ],
+   [
+    4800,
+    0
+   ]
+  ],
+  "powerW": 612,
+  "noiseDbA": 55,
+  "voltage": "230 V 1~",
+  "priceUsd": 1190,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-70-40",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 70-40",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    780
+   ],
+   [
+    1625,
+    731
+   ],
+   [
+    3250,
+    585
+   ],
+   [
+    4875,
+    341
+   ],
+   [
+    6500,
+    0
+   ]
+  ],
+  "powerW": 1250,
+  "noiseDbA": 61,
+  "voltage": "230 V 1~",
+  "priceUsd": 1050,
+  "availability": "in_stock",
+  "stockQty": 17,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-70-40E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 70-40 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    780
+   ],
+   [
+    1625,
+    731
+   ],
+   [
+    3250,
+    585
+   ],
+   [
+    4875,
+    341
+   ],
+   [
+    6500,
+    0
+   ]
+  ],
+  "powerW": 900,
+  "noiseDbA": 58,
+  "voltage": "230 V 1~",
+  "priceUsd": 1525,
+  "availability": "in_stock",
+  "stockQty": 14,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-80-50",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 80-50",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    860
+   ],
+   [
+    2250,
+    806
+   ],
+   [
+    4500,
+    645
+   ],
+   [
+    6750,
+    376
+   ],
+   [
+    9000,
+    0
+   ]
+  ],
+  "powerW": 2100,
+  "noiseDbA": 64,
+  "voltage": "400 V 3~",
+  "priceUsd": 1390,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RD-80-50E",
+  "category": "Rectangular duct fans",
+  "name": "Rectangular duct fan 80-50 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    860
+   ],
+   [
+    2250,
+    806
+   ],
+   [
+    4500,
+    645
+   ],
+   [
+    6750,
+    376
+   ],
+   [
+    9000,
+    0
+   ]
+  ],
+  "powerW": 1512,
+  "noiseDbA": 61,
+  "voltage": "400 V 3~",
+  "priceUsd": 2015,
+  "availability": "in_stock",
+  "stockQty": 17,
+  "etaDays": 0,
+  "maxAirTempC": 60
+ },
+ {
+  "code": "NW-RF-250",
+  "category": "Roof fans",
+  "name": "Roof fan 250",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    260
+   ],
+   [
+    450,
+    244
+   ],
+   [
+    900,
+    195
+   ],
+   [
+    1350,
+    114
+   ],
+   [
+    1800,
+    0
+   ]
+  ],
+  "powerW": 160,
+  "noiseDbA": 51,
+  "voltage": "230 V 1~",
+  "priceUsd": 520,
+  "availability": "in_stock",
+  "stockQty": 11,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-250E",
+  "category": "Roof fans",
+  "name": "Roof fan 250 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    260
+   ],
+   [
+    450,
+    244
+   ],
+   [
+    900,
+    195
+   ],
+   [
+    1350,
+    114
+   ],
+   [
+    1800,
+    0
+   ]
+  ],
+  "powerW": 115,
+  "noiseDbA": 48,
+  "voltage": "230 V 1~",
+  "priceUsd": 755,
+  "availability": "in_transit",
+  "stockQty": 0,
+  "etaDays": 6,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-315",
+  "category": "Roof fans",
+  "name": "Roof fan 315",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    340
+   ],
+   [
+    800,
+    319
+   ],
+   [
+    1600,
+    255
+   ],
+   [
+    2400,
+    149
+   ],
+   [
+    3200,
+    0
+   ]
+  ],
+  "powerW": 300,
+  "noiseDbA": 54,
+  "voltage": "230 V 1~",
+  "priceUsd": 690,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-315E",
+  "category": "Roof fans",
+  "name": "Roof fan 315 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    340
+   ],
+   [
+    800,
+    319
+   ],
+   [
+    1600,
+    255
+   ],
+   [
+    2400,
+    149
+   ],
+   [
+    3200,
+    0
+   ]
+  ],
+  "powerW": 216,
+  "noiseDbA": 51,
+  "voltage": "230 V 1~",
+  "priceUsd": 1000,
+  "availability": "on_order",
+  "stockQty": 0,
+  "etaDays": 30,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-400",
+  "category": "Roof fans",
+  "name": "Roof fan 400",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    430
+   ],
+   [
+    1300,
+    403
+   ],
+   [
+    2600,
+    323
+   ],
+   [
+    3900,
+    188
+   ],
+   [
+    5200,
+    0
+   ]
+  ],
+  "powerW": 550,
+  "noiseDbA": 57,
+  "voltage": "230 V 1~",
+  "priceUsd": 920,
+  "availability": "in_stock",
+  "stockQty": 1,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-400E",
+  "category": "Roof fans",
+  "name": "Roof fan 400 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    430
+   ],
+   [
+    1300,
+    403
+   ],
+   [
+    2600,
+    323
+   ],
+   [
+    3900,
+    188
+   ],
+   [
+    5200,
+    0
+   ]
+  ],
+  "powerW": 396,
+  "noiseDbA": 54,
+  "voltage": "230 V 1~",
+  "priceUsd": 1335,
+  "availability": "in_stock",
+  "stockQty": 16,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-500",
+  "category": "Roof fans",
+  "name": "Roof fan 500",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    2025,
+    488
+   ],
+   [
+    4050,
+    390
+   ],
+   [
+    6075,
+    228
+   ],
+   [
+    8100,
+    0
+   ]
+  ],
+  "powerW": 1100,
+  "noiseDbA": 60,
+  "voltage": "230 V 1~",
+  "priceUsd": 1290,
+  "availability": "in_stock",
+  "stockQty": 6,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-500E",
+  "category": "Roof fans",
+  "name": "Roof fan 500 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    520
+   ],
+   [
+    2025,
+    488
+   ],
+   [
+    4050,
+    390
+   ],
+   [
+    6075,
+    228
+   ],
+   [
+    8100,
+    0
+   ]
+  ],
+  "powerW": 792,
+  "noiseDbA": 57,
+  "voltage": "230 V 1~",
+  "priceUsd": 1870,
+  "availability": "in_stock",
+  "stockQty": 13,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-560",
+  "category": "Roof fans",
+  "name": "Roof fan 560",
+  "motor": "AC",
+  "curve": [
+   [
+    0,
+    600
+   ],
+   [
+    2750,
+    563
+   ],
+   [
+    5500,
+    450
+   ],
+   [
+    8250,
+    263
+   ],
+   [
+    11000,
+    0
+   ]
+  ],
+  "powerW": 1800,
+  "noiseDbA": 63,
+  "voltage": "400 V 3~",
+  "priceUsd": 1650,
+  "availability": "in_stock",
+  "stockQty": 24,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ },
+ {
+  "code": "NW-RF-560E",
+  "category": "Roof fans",
+  "name": "Roof fan 560 EC",
+  "motor": "EC",
+  "curve": [
+   [
+    0,
+    600
+   ],
+   [
+    2750,
+    563
+   ],
+   [
+    5500,
+    450
+   ],
+   [
+    8250,
+    263
+   ],
+   [
+    11000,
+    0
+   ]
+  ],
+  "powerW": 1296,
+  "noiseDbA": 60,
+  "voltage": "400 V 3~",
+  "priceUsd": 2395,
+  "availability": "in_stock",
+  "stockQty": 19,
+  "etaDays": 0,
+  "maxAirTempC": 120
+ }
+]

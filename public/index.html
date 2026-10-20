@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM Assistant demo</title>
+  <meta name="description" content="An AI assistant inside a CRM: knowledge-base search, catalogue and order tools, a daily briefing and cost control.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">N</span>
+      <div>
+        <h1><span id="company">Northwind Air</span> CRM</h1>
+        <p class="sub">AI assistant demo · fictional company and data</p>
+      </div>
+    </div>
+    <div class="top-right">
+      <span id="mode" class="badge">…</span>
+      <label class="who">Signed in as
+        <select id="user"></select>
+      </label>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="side" aria-label="Sections">
+      <button class="nav on" data-view="chat">Assistant</button>
+      <button class="nav" data-view="kb">Knowledge base</button>
+      <button class="nav" data-view="usage">Usage &amp; cost</button>
+      <button class="nav" data-view="settings">Profiles</button>
+    </nav>
+
+    <main>
+      <section id="view-chat" class="view">
+        <div id="chat" class="chat" aria-live="polite">
+          <div class="hello">
+            <h2>Ask about policies, products, customers or your day</h2>
+            <p>Answers come from the company knowledge base and from CRM tools. Every answer shows its sources, and <b>Inspect</b> shows each step: cache, search, prompt, tool calls, tokens and cost.</p>
+          </div>
+        </div>
+        <div class="chips" id="chips"></div>
+        <form id="ask" class="ask">
+          <input id="q" maxlength="500" autocomplete="off" placeholder="Ask the assistant…">
+          <button class="primary" type="submit">Ask</button>
+          <button id="new-chat" class="ghost" type="button" title="Start a new conversation">New</button>
+        </form>
+      </section>
+
+      <section id="view-kb" class="view" hidden>
+        <div class="row">
+          <h2>Knowledge base</h2>
+          <button id="reindex" class="ghost">Reindex</button>
+          <span id="reindex-status" class="muted"></span>
+        </div>
+        <p class="muted" id="kb-stats"></p>
+        <h3>Curated answers <span class="muted">(boosted in search; add one with 👍 under an answer)</span></h3>
+        <div id="gold" class="list"></div>
+        <h3>Articles</h3>
+        <div id="docs" class="list"></div>
+      </section>
+
+      <section id="view-usage" class="view" hidden>
+        <div class="row">
+          <h2>Usage and cost</h2>
+          <button id="refresh-usage" class="ghost">Refresh</button>
+          <button id="clear-cache" class="ghost">Clear answer cache</button>
+        </div>
+        <div id="kpis" class="kpis"></div>
+        <div class="grid2">
+          <div><h3>By action</h3><table id="by-action"></table></div>
+          <div><h3>By employee</h3><table id="by-user"></table></div>
+        </div>
+        <h3>Recent requests</h3>
+        <table id="recent" class="recent"></table>
+      </section>
+
+      <section id="view-settings" class="view" hidden>
+        <h2>Profiles</h2>
+        <p class="muted">Each employee gets a profile: model, prompt, the tools it may call and whether customer finances are visible. Changes apply to the next question and invalidate cached answers made with the old settings.</p>
+        <div id="profiles"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

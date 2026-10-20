@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Secrets: only the example is committed
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+
+# Written while the demo runs
+data/usage.jsonl
+data/answer-cache.json
+.ollama-backup/

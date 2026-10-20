@@ -1,0 +1,378 @@
+{
+ "today": "2026-10-12",
+ "customers": [
+  {
+   "id": "c-brightline",
+   "name": "Brightline Facilities",
+   "city": "Riverton",
+   "segment": "facility management",
+   "managerId": "u-anna",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 20000,
+   "balanceUsd": 6400,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-oakridge",
+   "name": "Oakridge Hotels",
+   "city": "Lakeside",
+   "segment": "hotels",
+   "managerId": "u-anna",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 15000,
+   "balanceUsd": 15800,
+   "onCreditHold": true
+  },
+  {
+   "id": "c-mercato",
+   "name": "Mercato Foods",
+   "city": "Riverton",
+   "segment": "restaurants",
+   "managerId": "u-anna",
+   "paymentTerms": "prepayment",
+   "creditLimitUsd": 0,
+   "balanceUsd": 0,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-harbor",
+   "name": "Harbor Clinic",
+   "city": "Eastport",
+   "segment": "healthcare",
+   "managerId": "u-olga",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 10000,
+   "balanceUsd": 2100,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-greenleaf",
+   "name": "Greenleaf Offices",
+   "city": "Riverton",
+   "segment": "offices",
+   "managerId": "u-anna",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 8000,
+   "balanceUsd": 0,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-atlas",
+   "name": "Atlas Construction",
+   "city": "Northfield",
+   "segment": "contractors",
+   "managerId": "u-olga",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 25000,
+   "balanceUsd": 11950,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-copperpot",
+   "name": "Copperpot Restaurants",
+   "city": "Eastport",
+   "segment": "restaurants",
+   "managerId": "u-anna",
+   "paymentTerms": "prepayment",
+   "creditLimitUsd": 0,
+   "balanceUsd": 0,
+   "onCreditHold": false
+  },
+  {
+   "id": "c-kestrel",
+   "name": "Kestrel Logistics",
+   "city": "Northfield",
+   "segment": "warehouses",
+   "managerId": "u-olga",
+   "paymentTerms": "net30",
+   "creditLimitUsd": 12000,
+   "balanceUsd": 4300,
+   "onCreditHold": false
+  }
+ ],
+ "orders": [
+  {
+   "number": "SO-2026-0398",
+   "customerId": "c-brightline",
+   "managerId": "u-anna",
+   "status": "delivered",
+   "createdAt": "2026-09-14",
+   "shipDate": "2026-09-16",
+   "lines": [
+    {
+     "code": "NW-ID-200E",
+     "qty": 6,
+     "priceUsd": 265
+    },
+    {
+     "code": "NW-ID-160",
+     "qty": 4,
+     "priceUsd": 140
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0412",
+   "customerId": "c-oakridge",
+   "managerId": "u-anna",
+   "status": "awaiting_stock",
+   "createdAt": "2026-09-29",
+   "shipDate": "2026-10-22",
+   "lines": [
+    {
+     "code": "NW-ID-250E",
+     "qty": 4,
+     "priceUsd": 355
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0415",
+   "customerId": "c-mercato",
+   "managerId": "u-anna",
+   "status": "confirmed",
+   "createdAt": "2026-10-06",
+   "shipDate": "2026-10-12",
+   "lines": [
+    {
+     "code": "NW-RF-400",
+     "qty": 1,
+     "priceUsd": 920
+    },
+    {
+     "code": "NW-RF-500",
+     "qty": 1,
+     "priceUsd": 1290
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0419",
+   "customerId": "c-atlas",
+   "managerId": "u-olga",
+   "status": "shipped",
+   "createdAt": "2026-10-01",
+   "shipDate": "2026-10-08",
+   "lines": [
+    {
+     "code": "NW-RD-80-50",
+     "qty": 2,
+     "priceUsd": 1390
+    },
+    {
+     "code": "NW-RD-50-25E",
+     "qty": 4,
+     "priceUsd": 755
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0421",
+   "customerId": "c-greenleaf",
+   "managerId": "u-anna",
+   "status": "quote",
+   "createdAt": "2026-10-08",
+   "shipDate": null,
+   "lines": [
+    {
+     "code": "NW-ID-250E",
+     "qty": 3,
+     "priceUsd": 355
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0424",
+   "customerId": "c-kestrel",
+   "managerId": "u-olga",
+   "status": "confirmed",
+   "createdAt": "2026-10-09",
+   "shipDate": "2026-10-13",
+   "lines": [
+    {
+     "code": "NW-AX-500",
+     "qty": 8,
+     "priceUsd": 360
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0427",
+   "customerId": "c-harbor",
+   "managerId": "u-olga",
+   "status": "awaiting_stock",
+   "createdAt": "2026-10-09",
+   "shipDate": "2026-11-09",
+   "lines": [
+    {
+     "code": "NW-ID-125E",
+     "qty": 10,
+     "priceUsd": 150
+    }
+   ]
+  },
+  {
+   "number": "SO-2026-0430",
+   "customerId": "c-copperpot",
+   "managerId": "u-anna",
+   "status": "quote",
+   "createdAt": "2026-10-10",
+   "shipDate": null,
+   "lines": [
+    {
+     "code": "NW-RF-500",
+     "qty": 1,
+     "priceUsd": 1290
+    }
+   ]
+  }
+ ],
+ "invoices": [
+  {
+   "number": "INV-2026-0811",
+   "orderNumber": "SO-2026-0398",
+   "customerId": "c-brightline",
+   "amountUsd": 2150,
+   "issuedAt": "2026-09-16",
+   "dueAt": "2026-10-16",
+   "paid": false
+  },
+  {
+   "number": "INV-2026-0774",
+   "orderNumber": "SO-2026-0352",
+   "customerId": "c-oakridge",
+   "amountUsd": 9800,
+   "issuedAt": "2026-08-04",
+   "dueAt": "2026-09-03",
+   "paid": false
+  },
+  {
+   "number": "INV-2026-0790",
+   "orderNumber": "SO-2026-0371",
+   "customerId": "c-oakridge",
+   "amountUsd": 6000,
+   "issuedAt": "2026-08-20",
+   "dueAt": "2026-09-19",
+   "paid": false
+  },
+  {
+   "number": "INV-2026-0820",
+   "orderNumber": "SO-2026-0419",
+   "customerId": "c-atlas",
+   "amountUsd": 5800,
+   "issuedAt": "2026-10-08",
+   "dueAt": "2026-11-07",
+   "paid": false
+  },
+  {
+   "number": "INV-2026-0802",
+   "orderNumber": "SO-2026-0388",
+   "customerId": "c-kestrel",
+   "amountUsd": 4300,
+   "issuedAt": "2026-09-05",
+   "dueAt": "2026-10-05",
+   "paid": false
+  },
+  {
+   "number": "INV-2026-0765",
+   "orderNumber": "SO-2026-0340",
+   "customerId": "c-harbor",
+   "amountUsd": 2100,
+   "issuedAt": "2026-07-30",
+   "dueAt": "2026-08-29",
+   "paid": true
+  }
+ ],
+ "tasks": [
+  {
+   "id": "t-1",
+   "assigneeId": "u-anna",
+   "title": "Call Greenleaf Offices about the NW-ID-250E quote",
+   "due": "2026-10-09",
+   "done": false,
+   "customerId": "c-greenleaf",
+   "kind": "call"
+  },
+  {
+   "id": "t-2",
+   "assigneeId": "u-anna",
+   "title": "Send the kitchen exhaust quote to Copperpot Restaurants",
+   "due": "2026-10-12",
+   "done": false,
+   "customerId": "c-copperpot",
+   "kind": "quote"
+  },
+  {
+   "id": "t-3",
+   "assigneeId": "u-anna",
+   "title": "Confirm the delivery window with Mercato Foods",
+   "due": "2026-10-12",
+   "done": false,
+   "customerId": "c-mercato",
+   "kind": "call"
+  },
+  {
+   "id": "t-4",
+   "assigneeId": "u-anna",
+   "title": "Ask Oakridge Hotels about the overdue invoices",
+   "due": "2026-10-13",
+   "done": false,
+   "customerId": "c-oakridge",
+   "kind": "call"
+  },
+  {
+   "id": "t-5",
+   "assigneeId": "u-mark",
+   "title": "First answer on RMA-2026-0151 (low airflow, Brightline)",
+   "due": "2026-10-12",
+   "done": false,
+   "customerId": "c-brightline",
+   "kind": "claim"
+  },
+  {
+   "id": "t-6",
+   "assigneeId": "u-mark",
+   "title": "Commissioning at Atlas Construction, site B",
+   "due": "2026-10-14",
+   "done": false,
+   "customerId": "c-atlas",
+   "kind": "internal"
+  },
+  {
+   "id": "t-7",
+   "assigneeId": "u-mark",
+   "title": "First answer on RMA-2026-0149 (noise, Harbor Clinic)",
+   "due": "2026-10-09",
+   "done": false,
+   "customerId": "c-harbor",
+   "kind": "claim"
+  },
+  {
+   "id": "t-8",
+   "assigneeId": "u-olga",
+   "title": "Approve the 9% discount request for Atlas Construction",
+   "due": "2026-10-12",
+   "done": false,
+   "customerId": "c-atlas",
+   "kind": "internal"
+  },
+  {
+   "id": "t-9",
+   "assigneeId": "u-olga",
+   "title": "Review credit hold for Oakridge Hotels",
+   "due": "2026-10-12",
+   "done": false,
+   "customerId": "c-oakridge",
+   "kind": "internal"
+  },
+  {
+   "id": "t-10",
+   "assigneeId": "u-anna",
+   "title": "Log the call with Brightline Facilities",
+   "due": "2026-10-08",
+   "done": true,
+   "customerId": "c-brightline",
+   "kind": "call"
+  }
+ ]
+}

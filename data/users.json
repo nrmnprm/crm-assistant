@@ -1,0 +1,20 @@
+[
+ {
+  "id": "u-anna",
+  "name": "Anna Novak",
+  "role": "Sales manager",
+  "profileId": "sales"
+ },
+ {
+  "id": "u-mark",
+  "name": "Mark Ellis",
+  "role": "Service engineer",
+  "profileId": "service"
+ },
+ {
+  "id": "u-olga",
+  "name": "Olga Brandt",
+  "role": "Head of sales",
+  "profileId": "management"
+ }
+]

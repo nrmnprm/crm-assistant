@@ -1,0 +1,30 @@
+[
+ {
+  "id": "qa-1",
+  "question": "Can a customer return a made-to-order fan?",
+  "answer": "No. Units that were made to order (status \"on order\" at the time of sale, custom voltage or coating) cannot be returned. The 24-month warranty still applies to them.",
+  "createdBy": "u-olga",
+  "createdAt": "2026-09-02"
+ },
+ {
+  "id": "qa-2",
+  "question": "Who approves a 10% discount?",
+  "answer": "The head of sales. Discounts from 5% to 12% need her approval: press \"Request discount\" on the quote and give the reason. Up to 5% a manager decides alone; above 12% only the sales director, and only for project deals.",
+  "createdBy": "u-olga",
+  "createdAt": "2026-09-02"
+ },
+ {
+  "id": "qa-3",
+  "question": "Are spare parts discounted?",
+  "answer": "No. Spare parts and commissioning services are never discounted.",
+  "createdBy": "u-anna",
+  "createdAt": "2026-09-18"
+ },
+ {
+  "id": "qa-4",
+  "question": "What is the most common reason for a low airflow claim?",
+  "answer": "A clogged filter or a wrong duty point. Ask for the filter's last replacement date and the duct layout before promising a replacement.",
+  "createdBy": "u-mark",
+  "createdAt": "2026-09-25"
+ }
+]
