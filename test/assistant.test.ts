@@ -5,7 +5,7 @@ process.env.EMBED_MODEL = ''
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 const { chunkText, loadIndex, rebuildIndex, search, terms } = await import('../src/kb.ts')
-const { pressureAt, runTool, selectFans } = await import('../src/tools.ts')
+const { accessMatrix, isDenied, pressureAt, runTool, selectFans } = await import('../src/tools.ts')
 const { briefingBlocks, isBriefingRequest } = await import('../src/briefing.ts')
 const { answerProblem, looksLikeFollowUp } = await import('../src/assistant.ts')
 const { suggestActions } = await import('../src/actions.ts')
@@ -76,6 +76,26 @@ test('access: managers see their own customers, finances only where allowed', ()
   assert.match((runTool('order_status', { order_number: '0419' }, anna) as any).error, /another manager/)
   const hold = runTool('list_customers', { on_credit_hold: true }, olga) as any
   assert.deepEqual(hold.customers.map((c: any) => c.name), ['Oakridge Hotels'])
+  // Refusals are flagged for the inspector; "nothing found" is not a refusal.
+  assert.ok(isDenied(atlasForAnna))
+  assert.ok(isDenied(runTool('find_customer', { query: 'Atlas' }, mark)))
+  assert.ok(isDenied(runTool('order_status', { order_number: '0419' }, anna)))
+  assert.ok(isDenied(runTool('customer_orders', { customer: 'Atlas' }, anna)))
+  assert.ok(!isDenied(runTool('find_customer', { query: 'Nobody Ltd' }, anna)))
+  assert.ok(!isDenied(order))
+})
+
+test('the access matrix is generated from profiles and scope rules', () => {
+  const rows = accessMatrix(profiles, users)
+  const cell = (key: string, p: string) => rows.find((r) => r.key === key)!.cells[p]
+  assert.equal(cell('find_customer', 'sales').level, 'own')
+  assert.match(cell('find_customer', 'sales').detail!, /Anna 5\/8/)
+  assert.equal(cell('find_customer', 'management').level, 'all')
+  assert.equal(cell('find_customer', 'service').level, 'none')
+  assert.equal(cell('order_status', 'service').label, 'any order')
+  assert.match(cell('order_status', 'service').detail!, /no prices/)
+  assert.equal(cell('finance', 'sales').label, 'visible')
+  assert.equal(cell('finance', 'service').label, 'hidden')
 })
 
 test('the briefing is computed from CRM data per user', () => {
@@ -84,6 +104,7 @@ test('the briefing is computed from CRM data per user', () => {
   assert.ok(!isBriefingRequest('How do I plan my day when a customer complains about noise in the meeting room?'))
   const anna = briefingBlocks(user('u-anna'), profile('sales'))
   assert.deepEqual(anna.map((b) => b.title), ['Tasks', 'Shipments', 'Overdue invoices'])
+  assert.ok(anna.every((b) => b.source === 'db'))
   const mark = briefingBlocks(user('u-mark'), profile('service'))
   assert.deepEqual(mark.map((b) => b.title), ['Tasks'])
   assert.ok(mark[0].items.some((i) => i.tag === 'claim'))

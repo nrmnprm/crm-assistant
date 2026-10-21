@@ -8,7 +8,7 @@ import { ask, clearAnswerCache, type Turn } from './assistant.ts'
 import { indexStats, loadIndex, rebuildIndex } from './kb.ts'
 import { checkModels, llmStatus } from './llm.ts'
 import { addGold, COMPANY, crm, gold, kbDocs, profiles, saveProfiles, userById, users } from './store.ts'
-import { TOOL_NAMES } from './tools.ts'
+import { accessMatrix, TOOL_NAMES } from './tools.ts'
 import { logUsage, usageSummary } from './usage.ts'
 
 const PORT = Number(process.env.PORT ?? 4320)
@@ -130,7 +130,7 @@ async function api(req: IncomingMessage, res: ServerResponse, path: string) {
   }
   if (req.method === 'POST' && path === '/api/cache/clear') return send(res, 200, { cleared: clearAnswerCache() })
   if (req.method === 'GET' && path === '/api/usage') return send(res, 200, usageSummary())
-  if (req.method === 'GET' && path === '/api/profiles') return send(res, 200, { profiles, tools: TOOL_NAMES })
+  if (req.method === 'GET' && path === '/api/profiles') return send(res, 200, { profiles, tools: TOOL_NAMES, access: accessMatrix(profiles, users) })
   const m = /^\/api\/profiles\/([\w-]+)$/.exec(path)
   if (req.method === 'PUT' && m) {
     const p = profiles.find((x) => x.id === m[1])

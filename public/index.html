@@ -79,6 +79,8 @@
       <section id="view-settings" class="view" hidden>
         <h2>Profiles</h2>
         <p class="muted">Each employee gets a profile: model, prompt, the tools it may call and whether customer finances are visible. Changes apply to the next question and invalidate cached answers made with the old settings.</p>
+        <div id="access" class="access-wrap"></div>
+        <p class="muted">Generated from the profiles below and the access rules in <code>src/tools.ts</code>: <b>own</b> means only the employee's own customers or orders, checked in code before the model sees any data.</p>
         <div id="profiles"></div>
       </section>
     </main>

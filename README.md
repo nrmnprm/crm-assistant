@@ -13,17 +13,21 @@ costed.
 | --- | --- |
 | **Knowledge-base answers** | Chunked wiki (≈700 characters, overlap), hybrid search (0.55 × cosine + 0.45 × BM25, lexical only without embeddings), curated answers boosted. Sources are added by code, never by the model. |
 | **Tools instead of memory** | Model codes, prices, stock, ETAs, customers and orders only come from tool calls: duty-point fan selection on performance curves, model lookup, analogs, customer search, orders, overdue invoices. At most 5 rounds, then a forced final answer. |
-| **Access control in code** | A sales manager sees only their own customers; credit limits are hidden from service engineers. The prompt is not the security boundary. |
+| **Access control in code** | A sales manager sees only their own customers and orders; credit limits and prices are hidden from service engineers. A refusal shows as a red DENIED step in the inspector, and the Profiles page shows the tool × role access matrix generated from the same rules. The prompt is not the security boundary. |
 | **Code check** | Every model code in an answer must have come from a tool result in that request; anything else is flagged as unverified. |
-| **Daily briefing** | "What's on my plate?" builds the agenda from CRM data (overdue tasks, shipments, overdue invoices, claims); the model only writes one or two sentences on top, and is not called at all when there is nothing to report. |
-| **Answer cache** | The same standalone question is answered once for everybody; the usage page shows what the cache saved. Changing a profile's prompt or model invalidates it. |
+| **Daily briefing** | "What's on my plate?" builds the agenda from CRM data (overdue tasks, shipments, overdue invoices, claims); the model only writes one or two sentences on top, and is not called at all when there is nothing to report. Each part is tagged MODEL or DB. |
+| **Answer cache** | The same standalone question is answered once per profile: the key is the question, the profile, its model, prompt and tools, so a sales answer is never served to service. Answers that used tools or name the asker are not cached. The usage page shows what the cache saved. |
 | **Query rewriting** | Only when needed: follow-ups ("and how do I cancel it?") and non-English questions are turned into a standalone English search query. |
 | **Output guards** | Empty answers, answers in another alphabet or a model writing the next turn itself get one stricter retry, then the usable part is kept. A malformed tool call falls back to an answer without tools. |
 | **Profiles as data** | Per-role model, temperature, prompt, tools and finance visibility, edited on the Profiles page. |
 | **Usage and cost** | One row per request: model calls, tokens, embedding tokens, cost from the provider's usage report, cache hits, latency. |
 | **Incremental index** | Each document has a hash of title and text; a reindex re-chunks and re-embeds only what changed and drops what was deleted. A 👍 under an answer saves it as a curated answer and indexes it at once. |
 
-![The briefing: the agenda is computed, the model writes the first sentence](docs/briefing.jpg)
+![The briefing: the agenda is computed (DB), the model writes the first sentence (MODEL)](docs/briefing.jpg)
+
+![A sales manager asks about another manager's customer: the tool refuses in code, shown as a DENIED step](docs/denied.jpg)
+
+![Profiles: the tool × role access matrix, generated from the profiles and the scope rules in code](docs/profiles.jpg)
 
 ## Run it
 
@@ -48,6 +52,7 @@ LLM_BASE_URL=http://localhost:11434/v1 LLM_MODEL=qwen2.5:7b EMBED_MODEL= npm sta
 npm test             # search, chunking, fan selection, access rules, briefing, guards
 npm run record       # re-record the preset answers with the configured model
 npm run screenshots  # regenerate docs/*.jpg (demo must be running)
+npm run index        # rebuild the knowledge-base index (incremental)
 npm run catalog      # regenerate the fictional catalogue
 ```
 

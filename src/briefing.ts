@@ -12,8 +12,13 @@ export interface BriefingItem {
   link: string
 }
 
+/** Where a piece of the briefing comes from: 'db' is built by code from CRM
+ * records, 'model' is text the model wrote. Shown as a tag in the UI. */
+export type BriefingSource = 'db' | 'model'
+
 export interface BriefingBlock {
   title: string
+  source: 'db'
   items: BriefingItem[]
 }
 
@@ -49,7 +54,7 @@ export function briefingBlocks(user: User, profile: Profile): BriefingBlock[] {
         link: `/tasks/${t.id}`,
       }
     })
-  if (taskItems.length) blocks.push({ title: 'Tasks', items: taskItems })
+  if (taskItems.length) blocks.push({ title: 'Tasks', source: 'db', items: taskItems })
 
   if (profile.id !== 'service') {
     const ship = crm.orders
@@ -60,7 +65,7 @@ export function briefingBlocks(user: User, profile: Profile): BriefingBlock[] {
         tag: o.shipDate === today ? 'today' : 'soon',
         link: `/orders/${o.number}`,
       }))
-    if (ship.length) blocks.push({ title: 'Shipments', items: ship })
+    if (ship.length) blocks.push({ title: 'Shipments', source: 'db', items: ship })
 
     if (profile.seesFinance) {
       const overdue = crm.invoices
@@ -71,7 +76,7 @@ export function briefingBlocks(user: User, profile: Profile): BriefingBlock[] {
           tag: 'money',
           link: `/finance/invoices/${i.number}`,
         }))
-      if (overdue.length) blocks.push({ title: 'Overdue invoices', items: overdue })
+      if (overdue.length) blocks.push({ title: 'Overdue invoices', source: 'db', items: overdue })
     }
   }
   return blocks
@@ -80,7 +85,7 @@ export function briefingBlocks(user: User, profile: Profile): BriefingBlock[] {
 export async function briefing(user: User, profile: Profile, question: string, model: string) {
   const blocks = briefingBlocks(user, profile)
   const count = blocks.reduce((s, b) => s + b.items.length, 0)
-  if (!count) return { text: 'Nothing urgent today: no tasks due, no shipments, no overdue invoices.', blocks, usage: null as Usage | null, llm: null }
+  if (!count) return { text: 'Nothing urgent today: no tasks due, no shipments, no overdue invoices.', textSource: 'db' as BriefingSource, blocks, usage: null as Usage | null, llm: null }
   const urgent = blocks.flatMap((b) => b.items).find((i) => i.tag === 'overdue' || i.tag === 'claim' || i.tag === 'money') ?? blocks[0].items[0]
   const res = await complete({
     model,
@@ -100,6 +105,8 @@ export async function briefing(user: User, profile: Profile, question: string, m
     ],
   })
   const fallback = `${count} item${count === 1 ? '' : 's'} today. Most urgent: ${urgent.text}.`
-  const text = res.ok && res.message.content?.trim() ? res.message.content.trim() : fallback
-  return { text, blocks, usage: res.ok ? res.usage : null, llm: res }
+  const wrote = res.ok && !!res.message.content?.trim()
+  const text = wrote ? res.message.content!.trim() : fallback
+  // The fallback sentence is assembled by code from the same records.
+  return { text, textSource: (wrote ? 'model' : 'db') as BriefingSource, blocks, usage: res.ok ? res.usage : null, llm: res }
 }

@@ -1,9 +1,10 @@
 /** Renders the README screenshots with headless Chrome over the DevTools
  * protocol (no Playwright needed). Start the demo first (`npm start`), then:
  *
- *   npm run screenshots            # docs/assistant.jpg, docs/briefing.jpg, docs/usage.jpg
+ *   npm run screenshots            # docs/assistant.jpg, denied.jpg, briefing.jpg, usage.jpg, profiles.jpg
  *
- * CHROME=/path/to/chrome overrides the browser; THEME=dark for dark shots. */
+ * CHROME=/path/to/chrome overrides the browser; THEME=dark for dark shots;
+ * CDP_PORT changes the DevTools port (default 9334). */
 import { spawn } from 'node:child_process'
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -13,7 +14,8 @@ const URL_ = process.env.DEMO_URL ?? 'http://127.0.0.1:4320/'
 const CHROME = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const THEME = process.env.THEME === 'dark' ? 'dark' : 'light'
 const OUT = new URL('../docs/', import.meta.url)
-const PORT = 9333
+// Not 9333: the sibling demos use that port, and two runs would share one browser.
+const PORT = Number(process.env.CDP_PORT ?? 9334)
 
 const profile = mkdtempSync(join(tmpdir(), 'crm-shots-'))
 const chrome = spawn(CHROME, [
@@ -84,6 +86,13 @@ try {
 
   await cdp('Page.navigate', { url: URL_ })
   await sleep(2000)
+  await run(ask('Does Atlas Construction'))
+  await run(`[...document.querySelectorAll('.meta button')].find((b) => b.textContent === 'Inspect').click()`)
+  await sleep(800)
+  await shot(`denied${suffix}.jpg`)
+
+  await cdp('Page.navigate', { url: URL_ })
+  await sleep(2000)
   await run(user('u-olga'))
   await run(ask("What's on my plate"))
   await sleep(500)
@@ -95,6 +104,10 @@ try {
   await run(`document.querySelector('[data-view="usage"]').click()`)
   await sleep(1500)
   await shot(`usage${suffix}.jpg`)
+
+  await run(`document.querySelector('[data-view="settings"]').click()`)
+  await sleep(1500)
+  await shot(`profiles${suffix}.jpg`)
 } finally {
   ws.close()
   chrome.kill()

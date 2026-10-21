@@ -8,7 +8,7 @@
  * lists, a sales manager only sees their own customers, and credit limits are
  * hidden from profiles without finance access. */
 import { catalog, crm, userById } from './store.ts'
-import type { Availability, CatalogModel, Profile, ToolContext } from './types.ts'
+import type { Availability, CatalogModel, Profile, ToolContext, User } from './types.ts'
 import type { ToolDef } from './llm.ts'
 
 const AVAIL_RANK: Record<Availability, number> = { in_stock: 0, in_transit: 1, on_order: 2 }
@@ -196,11 +196,43 @@ function findAnalogs(args: { code?: string }) {
   return { original: card(m), duty: { airflow_m3h: q, pressure_pa: p }, analogs: analogs.map((a) => card(a.x, { pressureAtDutyPa: Math.round(a.at) })) }
 }
 
+// ---- access ----
+
+/** Results that are an access refusal. Kept beside the result rather than in
+ * it: the JSON the model reads stays exactly as recorded. */
+const denials = new WeakSet<object>()
+
+function deny<T extends object>(result: T): T {
+  denials.add(result)
+  return result
+}
+
+/** True when the tool refused because of the caller's role or ownership,
+ * not because nothing matched. */
+export function isDenied(result: object): boolean {
+  return denials.has(result)
+}
+
+/** Which customers a profile may look up: sales managers only their own,
+ * everyone else all of them. */
+export type CustomerScope = 'own' | 'all'
+
+export function customerScope(profile: Profile): CustomerScope {
+  return profile.id === 'sales' ? 'own' : 'all'
+}
+
+/** Which orders a profile may look up by number. */
+export function orderScope(profile: Profile): CustomerScope {
+  return profile.id === 'sales' ? 'own' : 'all'
+}
+
+/** Tools that read customer records and are filtered by customerScope. */
+export const CUSTOMER_TOOLS = ['find_customer', 'list_customers', 'customer_orders']
+
 // ---- CRM tools ----
 
 function visibleCustomers(ctx: ToolContext) {
-  // Managers see their own customers; management and service see everyone.
-  return ctx.profile.id === 'sales' ? crm.customers.filter((c) => c.managerId === ctx.userId) : crm.customers
+  return customerScope(ctx.profile) === 'own' ? crm.customers.filter((c) => c.managerId === ctx.userId) : crm.customers
 }
 
 function customerCard(c: (typeof crm.customers)[number], ctx: ToolContext) {
@@ -224,12 +256,12 @@ function findCustomer(args: { query?: string }, ctx: ToolContext) {
   const mine = visibleCustomers(ctx).filter(match)
   if (mine.length) return { customers: mine.slice(0, 5).map((c) => customerCard(c, ctx)) }
   const other = crm.customers.filter(match)
-  if (other.length) return { customers: [], note: `found ${other.length}, but not among your customers; ask their manager (${userById(other[0].managerId)?.name})` }
+  if (other.length) return deny({ customers: [], note: `found ${other.length}, but not among your customers; ask their manager (${userById(other[0].managerId)?.name})` })
   return { customers: [], note: 'no customer with this name' }
 }
 
 function listCustomers(args: { on_credit_hold?: boolean; with_overdue_invoices?: boolean }, ctx: ToolContext) {
-  if (!ctx.profile.seesFinance && (args.on_credit_hold || args.with_overdue_invoices)) return { error: 'finance filters are not available for this role' }
+  if (!ctx.profile.seesFinance && (args.on_credit_hold || args.with_overdue_invoices)) return deny({ error: 'finance filters are not available for this role' })
   const overdue = (id: string) => crm.invoices.filter((i) => i.customerId === id && !i.paid && i.dueAt < crm.today)
   const list = visibleCustomers(ctx)
     .filter((c) => !args.on_credit_hold || c.onCreditHold)
@@ -249,7 +281,11 @@ function customerOrders(args: { customer_id?: string; customer?: string }, ctx: 
   const c =
     vis.find((x) => x.id === args.customer_id) ??
     vis.find((x) => name && (x.name.toLowerCase().includes(name) || name.includes(x.name.toLowerCase().split(' ')[0])))
-  if (!c) return { error: 'customer not found among yours', hint: 'call find_customer first' }
+  if (!c) {
+    const out = { error: 'customer not found among yours', hint: 'call find_customer first' }
+    const other = crm.customers.some((x) => x.id === args.customer_id || (name && (x.name.toLowerCase().includes(name) || name.includes(x.name.toLowerCase().split(' ')[0]))))
+    return other ? deny(out) : out
+  }
   const orders = crm.orders.filter((o) => o.customerId === c.id)
   const invoices = crm.invoices.filter((i) => i.customerId === c.id && !i.paid)
   return {
@@ -265,7 +301,7 @@ function orderStatus(args: { order_number?: string }, ctx: ToolContext) {
   const n = String(args.order_number ?? '').trim().toUpperCase()
   const o = crm.orders.find((x) => x.number === n || x.number.endsWith(n))
   if (!o) return { error: `no order ${n}` }
-  if (ctx.profile.id === 'sales' && o.managerId !== ctx.userId) return { error: `order ${o.number} belongs to another manager` }
+  if (orderScope(ctx.profile) === 'own' && o.managerId !== ctx.userId) return deny({ error: `order ${o.number} belongs to another manager` })
   return {
     number: o.number,
     customer: crm.customers.find((c) => c.id === o.customerId)?.name,
@@ -367,12 +403,65 @@ export function toolDefs(profile: Profile): ToolDef[] {
 /** Runs a tool. Always returns an object — the model needs an answer it can
  * read, not an exception. */
 export function runTool(name: string, args: Record<string, unknown>, ctx: ToolContext): Record<string, unknown> {
-  if (!ctx.profile.tools.includes(name) || !TOOLS[name]) return { error: `tool ${name} is not available for the ${ctx.profile.title} role` }
+  if (!ctx.profile.tools.includes(name) || !TOOLS[name]) return deny({ error: `tool ${name} is not available for the ${ctx.profile.title} role` })
   try {
     return TOOLS[name].run(args, ctx) as Record<string, unknown>
   } catch (e) {
     return { error: `tool failed: ${(e as Error).message}` }
   }
+}
+
+// ---- access matrix ----
+
+export interface AccessCell {
+  /** none: tool not in the profile; yes: no row-level filter; own/all: customer or order scope. */
+  level: 'none' | 'yes' | 'own' | 'all'
+  label: string
+  detail?: string
+}
+
+export interface AccessRow {
+  key: string
+  label: string
+  cells: Record<string, AccessCell>
+}
+
+/** Tool × profile grid for the Profiles page, built from the stored profiles
+ * and the same scope functions the tools use, so it cannot drift from what
+ * the tools actually enforce. */
+export function accessMatrix(profiles: Profile[], users: User[]): AccessRow[] {
+  const nC = crm.customers.length
+  const nO = crm.orders.length
+  // "5/8" per employee of the profile: own customers (or orders) out of all.
+  const ownCounts = (p: Profile, count: (u: User) => number, total: number) =>
+    users.filter((u) => u.profileId === p.id).map((u) => `${u.name.split(' ')[0]} ${count(u)}/${total}`).join(', ') || `0/${total}`
+  const rows: AccessRow[] = TOOL_NAMES.map((t) => ({
+    key: t,
+    label: t,
+    cells: Object.fromEntries(profiles.map((p): [string, AccessCell] => {
+      if (!p.tools.includes(t)) return [p.id, { level: 'none', label: '—' }]
+      if (CUSTOMER_TOOLS.includes(t)) {
+        return [p.id, customerScope(p) === 'own'
+          ? { level: 'own', label: 'own', detail: `${ownCounts(p, (u) => crm.customers.filter((c) => c.managerId === u.id).length, nC)} customers` }
+          : { level: 'all', label: 'all', detail: `${nC} customers` }]
+      }
+      if (t === 'order_status') {
+        const prices = p.seesFinance ? '' : ', no prices'
+        return [p.id, orderScope(p) === 'own'
+          ? { level: 'own', label: 'own', detail: `${ownCounts(p, (u) => crm.orders.filter((o) => o.managerId === u.id).length, nO)} orders${prices}` }
+          : { level: 'all', label: 'any order', detail: `${nO} orders${prices}` }]
+      }
+      return [p.id, { level: 'yes', label: '✓' }]
+    })),
+  }))
+  rows.push({
+    key: 'finance',
+    label: 'finance fields',
+    cells: Object.fromEntries(profiles.map((p): [string, AccessCell] => [p.id, p.seesFinance
+      ? { level: 'yes', label: 'visible', detail: 'credit limit, balance, invoices, prices' }
+      : { level: 'none', label: 'hidden' }])),
+  })
+  return rows
 }
 
 /** One-line summary of a tool result for the inspector. */

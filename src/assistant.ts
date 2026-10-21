@@ -15,11 +15,11 @@
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { suggestActions } from './actions.ts'
-import { briefing, isBriefingRequest, type BriefingBlock } from './briefing.ts'
+import { briefing, isBriefingRequest, type BriefingBlock, type BriefingSource } from './briefing.ts'
 import { search, type SearchResult } from './kb.ts'
 import { LLM_MODEL, complete, type CompletionResult, type Message, type Usage } from './llm.ts'
 import { catalog, crm, DATA, profileOf, userById } from './store.ts'
-import { runTool, summarize, toolDefs } from './tools.ts'
+import { isDenied, runTool, summarize, toolDefs } from './tools.ts'
 import { logUsage } from './usage.ts'
 import type { Profile, User } from './types.ts'
 
@@ -32,6 +32,8 @@ export interface Step {
   name: string
   ms: number
   ok: boolean
+  /** The tool refused because of the user's role or ownership. */
+  denied?: boolean
   note: string
   detail?: unknown
 }
@@ -43,6 +45,8 @@ export interface Answer {
   actions: { label: string; url: string }[]
   products: Record<string, unknown>[]
   blocks?: BriefingBlock[]
+  /** Briefing only: whether the opening text came from the model or from code. */
+  textSource?: BriefingSource
   /** Model codes in the answer that no tool returned in this request. */
   unverifiedCodes: string[]
   trace: {
@@ -96,9 +100,9 @@ class Tracker {
   model: string | null = null
   private t = Date.now()
 
-  step(name: string, ok: boolean, note: string, detail?: unknown) {
+  step(name: string, ok: boolean, note: string, detail?: unknown, denied = false) {
     const now = Date.now()
-    this.steps.push({ name, ms: now - this.t, ok, note, ...(detail !== undefined ? { detail } : {}) })
+    this.steps.push({ name, ms: now - this.t, ok, ...(denied ? { denied } : {}), note, ...(detail !== undefined ? { detail } : {}) })
     this.t = now
   }
 
@@ -171,8 +175,8 @@ export async function ask(userId: string, question: string, history: Turn[], opt
     tr.step('route', true, 'briefing phrase → agenda from CRM data')
     const b = await briefing(user, profile, q, model)
     if (b.llm) tr.llm(b.llm)
-    tr.step('briefing', true, `${b.blocks.reduce((s, x) => s + x.items.length, 0)} items in ${b.blocks.length} blocks; ${b.llm ? 'model wrote the intro' : 'no model call'}`)
-    return finish(tr, user, q, started, { text: b.text, kind: 'briefing', blocks: b.blocks, sources: [], actions: [], products: [], unverifiedCodes: [] })
+    tr.step('briefing', true, `${b.blocks.reduce((s, x) => s + x.items.length, 0)} items in ${b.blocks.length} blocks; ${b.textSource === 'model' ? 'model wrote the intro' : b.llm ? 'model call failed, intro built by code' : 'no model call'}`)
+    return finish(tr, user, q, started, { text: b.text, kind: 'briefing', textSource: b.textSource, blocks: b.blocks, sources: [], actions: [], products: [], unverifiedCodes: [] })
   }
 
   // 2. Shared answer cache: only for standalone questions.
@@ -282,7 +286,8 @@ export async function ask(userId: string, question: string, history: Turn[], opt
       const t0 = Date.now()
       const result = runTool(call.function.name, args, { userId: user.id, profile })
       toolResults.push(result)
-      tr.step(`tool ${call.function.name}`, !result.error, `${summarize(result)} (${Date.now() - t0} ms)`, { args, result })
+      const denied = isDenied(result)
+      tr.step(`tool ${call.function.name}`, !result.error && !denied, `${summarize(result)} (${Date.now() - t0} ms)`, { args, result }, denied)
       messages.push({ role: 'tool', tool_call_id: call.id, name: call.function.name, content: JSON.stringify(result) })
     }
     res = await complete({ model, messages, tools, temperature: profile.temperature, maxTokens: profile.maxTokens })
@@ -362,7 +367,7 @@ export async function ask(userId: string, question: string, history: Turn[], opt
   if (res.ok && !history.length && !toolResults.length && !text.includes(user.name.split(' ')[0])) {
     answerCache[key] = { answer, costUsd: tr.usage.costUsd, createdAt: Date.now() }
     if (process.env.DATA_WRITE !== '0') writeFileSync(CACHE_FILE, JSON.stringify(answerCache))
-    tr.step('cache store', true, 'saved for the next person who asks the same')
+    tr.step('cache store', true, `saved for the next person with the ${profile.title} profile who asks the same`)
   }
   return finish(tr, user, q, started, answer)
 }

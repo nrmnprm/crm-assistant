@@ -140,11 +140,11 @@ function stepsView(trace) {
     } else if (s.name.startsWith('tool ') && s.detail) {
       detail = el('details', {}, el('summary', {}, 'arguments and result'), el('pre', {}, JSON.stringify(s.detail, null, 2)))
     }
-    return el('div', { class: 'step' },
-      el('span', { class: s.ok ? 'ok' : 'no' }, s.ok ? '✓' : '!'),
+    return el('div', { class: s.denied ? 'step denied' : 'step' },
+      el('span', { class: s.ok ? 'ok' : 'no' }, s.ok ? '✓' : s.denied ? '⊘' : '!'),
       el('b', {}, s.name),
       el('span', { class: 'ms' }, `${s.ms} ms`),
-      el('div', {}, s.note, detail))
+      el('div', {}, s.denied ? el('span', { class: 'deny', title: 'Refused by the access rules in code, not by the model' }, 'DENIED') : null, s.note, detail))
   }))
 }
 
@@ -160,6 +160,13 @@ function feedbackButtons(q, answer) {
   const bad = el('button', { type: 'button', onclick: () => { box.textContent = 'thanks — noted' } }, '👎')
   box.append(good, ' ', bad)
   return box
+}
+
+/** Where a briefing part comes from: [DB] built by code from CRM records, [MODEL] written by the model. */
+function srcTag(source) {
+  return source === 'model'
+    ? el('span', { class: 'srctag model', title: 'Written by the model' }, 'MODEL')
+    : el('span', { class: 'srctag db', title: 'Built by code from CRM records' }, 'DB')
 }
 
 function botMessage(q, a) {
@@ -178,9 +185,10 @@ function botMessage(q, a) {
   if (tools) stats.push(`${tools} tool call${tools > 1 ? 's' : ''}`)
   return el('div', { class: 'msg bot' },
     el('div', { class: 'bubble' },
+      a.textSource ? srcTag(a.textSource) : null,
       el('div', { class: 'md', html: md(a.text) }),
       a.blocks?.length ? el('div', { class: 'blocks' }, a.blocks.map((b) =>
-        el('div', { class: 'block' }, el('h4', {}, b.title), el('ul', {}, b.items.map((i) => el('li', { class: i.tag }, i.text)))))) : null,
+        el('div', { class: 'block' }, el('h4', {}, b.title, ' ', srcTag(b.source)), el('ul', {}, b.items.map((i) => el('li', { class: i.tag }, i.text)))))) : null,
       a.products?.length ? el('div', { class: 'products' }, a.products.map((p) =>
         el('div', { class: 'product' }, el('b', {}, p.code), ' ', el('span', { class: `avail ${p.availability}` }, p.availability.replace('_', ' ')),
           el('small', {}, `$${p.priceUsd} · ${p.availability === 'in_stock' ? `${p.stockQty} in stock` : `in ${p.etaDays} days`} · ${p.noiseDbA} dB(A)`)))) : null,
@@ -254,8 +262,21 @@ async function loadUsage() {
 
 // ---------- profiles ----------
 
+/** Tool × profile grid; the server builds it from the profiles and the scope rules the tools enforce. */
+function accessView(profiles, access) {
+  return el('table', { class: 'access' },
+    el('tr', {}, el('th', {}, 'Access by role'), profiles.map((p) => el('th', {}, p.title))),
+    access.map((r) => el('tr', { class: r.key === 'finance' ? 'fin' : '' },
+      el('td', {}, el('code', {}, r.label)),
+      profiles.map((p) => {
+        const c = r.cells[p.id]
+        return el('td', { class: `lvl ${c.level}` }, el('span', { class: 'cell' }, c.label), c.detail ? el('small', {}, c.detail) : null)
+      }))))
+}
+
 async function loadProfiles() {
-  const { profiles, tools } = await api('/api/profiles')
+  const { profiles, tools, access } = await api('/api/profiles')
+  $('#access').replaceChildren(accessView(profiles, access))
   $('#profiles').replaceChildren(...profiles.map((p) => {
     const model = el('input', { value: p.model ?? '', placeholder: `default (${state.meta.llm.model})` })
     const temp = el('input', { type: 'number', min: 0, max: 1.5, step: 0.1, value: p.temperature })
@@ -277,6 +298,8 @@ async function loadProfiles() {
             await api(`/api/profiles/${p.id}`, { model: model.value, temperature: Number(temp.value), maxTokens: Number(maxT.value), seesFinance: fin.checked,
               tools: boxes.filter((b) => b.box.checked).map((b) => b.t), prompt: prompt.value }, 'PUT')
             status.textContent = 'saved'
+            const fresh = await api('/api/profiles')
+            $('#access').replaceChildren(accessView(fresh.profiles, fresh.access))
           } catch (e) { status.textContent = `error: ${e.message}` }
         } }, 'Save'), status))
   }))
