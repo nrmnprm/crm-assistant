@@ -26,10 +26,10 @@ const PRESETS = {
     'What is the status of order 0412?',
     'Does Atlas Construction have overdue invoices?',
     "What's on my plate today?",
-    'Кто согласует скидку 10%?',
+    'Who approves a 10% discount?',
   ],
   'u-mark': [
-    'Как оформить рекламацию?',
+    'How do I file a warranty claim?',
     'A customer says the fan is too weak after a year. What should I check?',
     'What is the status of order 0412?',
     "What's on my plate today?",
